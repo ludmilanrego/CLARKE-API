@@ -6,7 +6,10 @@ A API consiste em uma ferramenta para a listagem de fornecedores que tem valor m
 
 Todas as funcionalidades operam vinculadas a um banco de dados SQL e as imagens das logos dos fornecedores foram salvas em um diretório no blackblaze.
 
+API disponível em: https://clarkeapi.onrender.com
+
 Para experiência completa acessar o repositório [CLARKE - UI] (https://github.com/ludmilanrego/CLARKE-UI)
+ ou acessar https://clarke-ui.vercel.app/ 
 
 ## Como rodar o projeto
 
