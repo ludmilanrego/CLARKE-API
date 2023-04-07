@@ -1,4 +1,3 @@
-
 -- criar banco de dados
 create database clarke;
 
@@ -13,21 +12,6 @@ create table suppliers (
   total_customers int not null,
   costumers_score int not null
 );
-
--- create table categorias (
---   id serial primary key,
---   descrição text
--- );
-
--- create table transacoes (
---   id serial primary key,
---   descrição text,
---   valor int not null,
---   data date,
---   categoria_id int references categorias(id) not null,
---   usuario_id int references usuarios(id) not null,
---   tipo text
--- );
 
 --iserir categorias na tabela categorias
 INSERT INTO "suppliers" (name, img, origin_state, cost_per_kwh, min_kwh, total_customers, costumers_score) 
