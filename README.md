@@ -4,12 +4,16 @@ nodeJS | PostgreSQL | API REST
 
 A API consiste em uma ferramenta para a listagem de fornecedores que tem valor mínimo de consumo inferior ou igual ao consumo informado.
 
-Todas as funcionalidades operam vinculadas a um banco de dados SQL e as imagens das logos dos fornecedores foram salvas em um diretório no blackblaze.
-
 API disponível em: https://clarkeapi.onrender.com
 
 Para experiência completa acessar o repositório [CLARKE - UI] (https://github.com/ludmilanrego/CLARKE-UI)
  ou acessar https://clarke-ui.vercel.app/ 
+
+Todas as funcionalidades operam vinculadas a um banco de dados SQL e as imagens das logos dos fornecedores foram salvas em um diretório no blackblaze.
+
+*No banco de dados foram cadastrados 14 fornecedores 
+*A Range de valor mínimo de consumo é de 14000-20000 kWh
+
 
 ## Como rodar o projeto
 
@@ -21,6 +25,8 @@ host: 'localhost',
 port: 5432,
 user: 'postgres',
 password: '123456'
+
+*coloque os dados de conexão no arquivo .env
 
 1.2 - Crie uma banco de dadoscom o neome clarke
 Copie o comando descrito no arquivo dump.sql na seção reservada para as querys no beekeeper e selecione run.
@@ -45,12 +51,37 @@ npm i npm run dev no terminal do VScode
 
 ### Listar fornecedores em função do valor de consumo
 
+#### `GET` `/suppliers`
+
+Esse endpoint lista todos os fornecedores cadastrados 
+Atenção: O valor de consumo informado deve estar em kWh.
+
+curl --request GET \
+  --url http://localhost:3001/suppliers/minkwh \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"energyConsumption": 14000
+}'
+
+- **Requisição**  
+    Sem parâmetros de rota, query ou body.  
+
+- **Resposta**  
+    O corpo (body) da resposta apresenta um array com a lista de fornecedores cadastrados. 
+
+
+#### **Exemplo de resposta**
+
+```javascript
+[{"id":2,"name":"Corumbá","img":"https://f005.backblazeb2.com/file/clarke-challenge/corumba-concessoes.png","origin_state":"Bahia","cost_per_kwh":105,"min_kwh":100,"total_customers":100,"costumers_score":4},{"id":3,"name":"Aratu","img":"https://f005.backblazeb2.com/file/clarke-challenge/aratu.jpg","origin_state":"Bahia","cost_per_kwh":100,"min_kwh":100,"total_customers":100,"costumers_score":5},{"id":4,"name":"Ventos Potiguares","img":"https://f005.backblazeb2.com/file/clarke-challenge/ventos-potiguares.png","origin_state":"Piauí","cost_per_kwh":109,"min_kwh":10,"total_customers":100,"costumers_score":3},{"id":5,"name":"d","img":"https://f005.backblazeb2.com/file/clarke-challenge/aratu.jpg","origin_state":"Bahia","cost_per_kwh":107,"min_kwh":10,"total_customers":100,"costumers_score":5},{"id":6,"name":"e","img":"https://f005.backblazeb2.com/file/clarke-challenge/ventos-potiguares.png","origin_state":"São Paulo","cost_per_kwh":110,"min_kwh":50,"total_customers":100,"costumers_score":2}]
+```
+
 #### `POST` `/suppliers/minkwh`
 
 Esse endpoint lista todos os fornecedores cadastrados que exigem um valor de consumo de energia mensal inferior ou igual ao valor de consumo informado.
 Atenção: O valor de consumo informado deve estar em kWh.
 
-curl --request GET \
+curl --request POST \
   --url http://localhost:3001/suppliers/minkwh \
   --header 'Content-Type: application/json' \
   --data '{
@@ -64,7 +95,7 @@ curl --request GET \
  
 
 - **Resposta**  
-    O corpo (body) da resposta apresenta o conteúdo do usuário cadastrado. 
+    O corpo (body) da resposta apresenta um array com a lista de fornecedores cadastrados que atendem a exigencia de consumo mínimo. 
 
 
 #### **Exemplo de resposta**

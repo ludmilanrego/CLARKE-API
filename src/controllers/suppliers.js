@@ -23,7 +23,6 @@ const listSuppliersMinKwh = async (req, res) => {
     if (rowCount <= 0) {
         return res.status(400).json("Não existe fornecedor disponível para esse valor consumo");
     }
-
     return res.status(200).json(rows);
 }
 
